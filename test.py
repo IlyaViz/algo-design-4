@@ -11,6 +11,8 @@ if __name__ == "__main__":
     iters = [sl[0] for sl in knapsack.solve_log]
     values = [sl[1] for sl in knapsack.solve_log]
 
+    print(knapsack.solve_log)
+
     plt.plot(iters, values)
 
     plt.xlabel("Iterations")

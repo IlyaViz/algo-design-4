@@ -99,18 +99,24 @@ class Knapsack:
         return weight, value            
 
     def local_improvement(self, individual: list) -> None:
-        last_evaluation = self.evaluate_individual(individual)
-        
-        for gen_number1 in range(self.chromosome_length):
-            for gen_number2 in range(gen_number1+1, self.chromosome_length):
-                self.toggle_gen(individual, gen_number1)
-                self.toggle_gen(individual, gen_number2)
+        evaluation = self.evaluate_individual(individual)
+        best_evaluation = evaluation[1] - evaluation[0]
+        best_gen_number = -1
 
-                if self.evaluate_individual(individual)[0] <= self.MAX_WEIGHT and self.evaluate_individual(individual)[1] > last_evaluation[1]:
-                    break
+        for gen_number in range(self.chromosome_length):
+            self.toggle_gen(individual, gen_number)
 
-                self.toggle_gen(individual, gen_number1)
-                self.toggle_gen(individual, gen_number2)
+            evaluation = self.evaluate_individual(individual)
+            current_evalutaion = evaluation[1] - evaluation[0]
+
+            if evaluation[0] <= self.MAX_WEIGHT and current_evalutaion > best_evaluation:
+                best_evaluation = current_evalutaion
+                best_gen_number = gen_number
+            
+            self.toggle_gen(individual, gen_number)
+
+        if best_gen_number != -1:
+            self.toggle_gen(individual, best_gen_number)
 
     def toggle_gen(self, individual: list, gen_number: int) -> None:
         individual[gen_number] = 1 if individual[gen_number] == 0 else 0
