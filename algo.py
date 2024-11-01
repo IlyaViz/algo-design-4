@@ -112,5 +112,5 @@ class Knapsack:
                 self.toggle_gen(individual, gen_number1)
                 self.toggle_gen(individual, gen_number2)
 
-    def toggle_gen(self, individual, gen_number):
+    def toggle_gen(self, individual: list, gen_number: int) -> None:
         individual[gen_number] = 1 if individual[gen_number] == 0 else 0
