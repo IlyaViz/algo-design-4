@@ -30,7 +30,11 @@ class Knapsack:
 
             self.solve_log.append((iter, self.evaluate_individual(self.get_best_individual(init_population))[1]))
 
-        return self.evaluate_individual(self.get_best_individual(init_population))
+        best_individual = self.get_best_individual(init_population)
+        best_evaluation = self.evaluate_individual(best_individual)
+        result_items = [self.items[gen_number] for gen_number in range(self.chromosome_length) if best_individual[gen_number] == 1]
+
+        return (best_evaluation, result_items)
 
     def get_init_population(self) -> list:
         popultion = [[0 for _ in range(self.chromosome_length)] for _ in range(self.INIT_POPULATION_SIZE)]

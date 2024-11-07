@@ -23,8 +23,10 @@ def generate_random_items() -> list:
 if __name__ == '__main__':
     items = generate_random_items()
     
-    print("weights:", list(map(lambda x: x[0], items)))
-    print("values:", list(map(lambda x: x[1], items)))
+    print("Weights:", list(map(lambda x: x[0], items)))
+    print("Values:", list(map(lambda x: x[1], items)))
 
     result = Knapsack(items).solve()
-    print(f"Knapsack weighs {result[0]} with total value {result[1]}")
+
+    print(f"Value: {result[0][1]}")
+    print(result[1])
